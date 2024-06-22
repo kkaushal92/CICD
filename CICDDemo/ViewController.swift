@@ -21,11 +21,11 @@ class ViewController: UIViewController {
     }
     
     func testingabc()  {
-print("iam abc")
+
     }
     
     func hello()  {
-var abc = "asjkhkllkl"
+var abc = "asjkhkllklkh"
         print(abc)
     }
 }
