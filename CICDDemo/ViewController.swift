@@ -21,7 +21,6 @@ class ViewController: UIViewController {
     }
     
     func testingabc()  {
-
     }
     
     func hello()  {
