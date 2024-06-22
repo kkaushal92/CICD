@@ -21,6 +21,8 @@ class ViewController: UIViewController {
     }
     
     func testingabc()  {
+        var abc = "asjkhkllklkh"
+
     }
     
     func hello()  {
