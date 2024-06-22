@@ -25,7 +25,7 @@ print("iam abc")
     }
     
     func hello()  {
-var abc = "as"
+var abc = "asjkhk"
         print(abc)
     }
 }
