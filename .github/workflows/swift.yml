@@ -22,10 +22,10 @@ jobs:
 
       - uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 2.4.22
+          ruby-version: 2.7.2 
 
       - name: Install Bundler
-        run: gem install bundler -v 2.7.2
+        run: gem install bundler -v 2.4.22
 
       - name: Install gems
         run: bundle install
@@ -43,8 +43,3 @@ jobs:
       - name: Run Tests
         run: bundle exec fastlane scan
       
-      - name: ChatGPT Reviewer
-        uses: feiskyer/ChatGPT-Reviewer@v0.8
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
