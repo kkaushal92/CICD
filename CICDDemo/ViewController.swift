@@ -19,5 +19,14 @@ class ViewController: UIViewController {
     func testing()  {
 
     }
+    
+    func testingabc()  {
+print("iam abc")
+    }
+    
+    func hello()  {
+var abc = "as"
+        print(abc)
+    }
 }
 
