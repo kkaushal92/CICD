@@ -26,9 +26,8 @@ class ViewController: UIViewController {
     }
     func testingabc(_ abc:String, _ def:String)  {
         for i in 0...10 {
-            print("\("i")")
+            print("\"i")
         }
-        var abc = "asjkhkllklkh"
 
     }
     func hello()  {
