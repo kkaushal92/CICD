@@ -20,11 +20,17 @@ class ViewController: UIViewController {
 
     }
     
-    func testingabc()  {
+    func testingabc(_ abc:String)  {
         var abc = "asjkhkllklkh"
 
     }
-    
+    func testingabc(_ abc:String, _ def:String)  {
+        for i in 0...10 {
+            print("\("i")")
+        }
+        var abc = "asjkhkllklkh"
+
+    }
     func hello()  {
 var abc = "asjkhkllklkh"
         print(abc)
