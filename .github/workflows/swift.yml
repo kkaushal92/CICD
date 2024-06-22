@@ -43,8 +43,3 @@ jobs:
       - name: Run Tests
         run: bundle exec fastlane scan
       
-      - name: ChatGPT Reviewer
-        uses: feiskyer/ChatGPT-Reviewer@v0.8
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
