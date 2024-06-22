@@ -1,0 +1,19 @@
+default_platform :ios
+
+
+xcode_version = ENV['XCODE_VERSION'] || '15.2'
+project = 'CICDDemo.xcodeproj'
+stress_tests_cycles = 50
+derived_data_path = 'derived_data'
+source_packages_path = 'spm_cache'
+
+
+platform :ios do
+    desc 'Builds project and executes unit tests'
+    lane :unit_test do |options|
+      scan(
+        clean: options[:clean],
+        skip_package_dependencies_resolution: options[:skip_package_dependencies_resolution]
+      )
+    end
+end
