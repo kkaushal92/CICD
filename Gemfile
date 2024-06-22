@@ -3,7 +3,7 @@
 source 'https://rubygems.org'
 
 
-ruby '~> 2.4.22'
+ruby '~> 2.7.2'
 
 gem 'fastlane'
 gem 'xcode-install'
