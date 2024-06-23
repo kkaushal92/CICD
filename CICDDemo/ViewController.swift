@@ -33,6 +33,10 @@ class ViewController: UIViewController {
     func hello()  {
         var abc:String?
         print(abc!)
+        
+        var zx:String?
+        print(zx!)
+
     }
 }
 
