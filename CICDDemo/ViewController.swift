@@ -31,8 +31,8 @@ class ViewController: UIViewController {
 
     }
     func hello()  {
-var abc = "asjkhkllklkh"
-        print(abc)
+        var abc:String?
+        print(abc!)
     }
 }
 
