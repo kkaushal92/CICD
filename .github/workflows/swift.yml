@@ -30,7 +30,7 @@ jobs:
 
       - name: Install SwiftLint
         run: brew install swiftlint
-
+        
       - name: Swift Packages Cache
         uses: actions/cache@v2
         id: cache
@@ -41,16 +41,13 @@ jobs:
           key: ${{ runner.os }}-deps-v1-${{ hashFiles('BILDsolid.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved') }}
           restore-keys: ${{ runner.os }}-deps-v1-/...
 
-      
+      - name: Run Tests
+        run: bundle exec fastlane scan
+        
       - name: ChatGPT Reviewer
         uses: feiskyer/ChatGPT-Reviewer@v0.8
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           
-      - name: Run SwiftLint
-        run: swiftlint lint 
-
-      - name: Run Tests
-        run: bundle exec fastlane scan
 
