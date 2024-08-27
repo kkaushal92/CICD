@@ -19,6 +19,14 @@ class ViewController: UIViewController {
     func testing()  {
 
     }
+    func testingabc1(_ abc:String)  {
+        var abc = "asjkhkllklkh"
+
+    }
+    func testingabc2(_ abc:String)  {
+        var abc = "asjkhkllklkh"
+
+    }
     
     func testingabc(_ abc:String)  {
         var abc = "asjkhkllklkh"
