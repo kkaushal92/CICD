@@ -23,19 +23,15 @@ jobs:
         with:
           xcode-version: latest-stable
        
-      - name: Code Review
-        with:
-         run: ubuntu-latest
-        uses: anc95/ChatGPT-CodeReview@main
+      - name: Decrypt and install certificate
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-          # Optional
-          LANGUAGE: English
-          OPENAI_API_ENDPOINT: https://api.openai.com/v1
-          MODEL: gpt-3.5-turbo # https://platform.openai.com/docs/models
-          MAX_PATCH_LENGTH: 10000 # if the patch/diff length is large than MAX_PATCH_LENGTH, will be ignored and won't review. By default, with no MAX_PATCH_LENGTH set, there is also no limit for the patch/diff length.
-     
+          CERTIFICATE: ${{ secrets.DISTRIBUTION_CERTIFICATE }}
+          CERTIFICATE_PASSWORD: ${{ secrets.CERTIFICATE_PASSWORD }}
+        run: |
+          echo "$CERTIFICATE" | base64 --decode > certificate.p12
+          security import certificate.p12 -P "$CERTIFICATE_PASSWORD" -T /usr/bin/codesign
+          security set-key-partition-list -S apple-tool:,apple: -s -k "$CERTIFICATE_PASSWORD" ~/Library/Keychains/login.keychain-db
+          
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: 2.7.2
