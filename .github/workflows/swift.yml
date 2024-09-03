@@ -23,7 +23,7 @@ jobs:
         with:
           xcode-version: latest-stable
    
-      - name: Create Keychain
+      - name: Create Keychains
         run: |
           security create-keychain -p "$CERTIFICATE_PASSWORD" ~/Library/Keychains/login.keychain-db
           security default-keychain -s ~/Library/Keychains/login.keychain-db
