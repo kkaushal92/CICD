@@ -50,8 +50,9 @@ jobs:
           restore-keys: ${{ runner.os }}-deps-v1-/...
 
       - name: Install certificates and provisioning profiles
+        env:
+        MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
         run: bundle exec fastlane match_app
-      # Sync certificates and provisioning profiles
 
       - name: Build the app
         run: bundle exec fastlane build_app
