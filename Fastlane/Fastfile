@@ -19,9 +19,9 @@ platform :ios do
 end
 
 platform :ios do
-lane :match do
+lane :match_app do
   match(
-    type: "appstore", # or "development", depending on your needs
+    type: "development", # or "development", depending on your needs
     readonly: false,
     git_url: "https://github.com/kkaushal92/CICD.git",
     # other options if needed
