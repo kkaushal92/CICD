@@ -22,25 +22,21 @@ jobs:
       - uses: maxim-lobanov/setup-xcode@v1
         with:
           xcode-version: latest-stable
-   
-      - name: Create Keychains
-        run: |
-          security create-keychain -p "$CERTIFICATE_PASSWORD" ~/Library/Keychains/login.keychain-db
-          security default-keychain -s ~/Library/Keychains/login.keychain-db
-
-      - name: Debug Certificate and Keychain
-        run: |
-          echo "Certificate and Keychain Debug Info:"
-          echo "$CERTIFICATE" | base64 --decode | head
-          security list-keychains
 
       - name: Decrypt and install certificate
         env:
           CERTIFICATE: ${{ secrets.DISTRIBUTION_CERTIFICATE }}
           CERTIFICATE_PASSWORD: ${{ secrets.CERTIFICATE_PASSWORD }}
         run: |
-          echo "$CERTIFICATE" | base64 --decode > certificate.p12
+          # Create and set up the keychain if it doesn't already exist
+          if [ ! -f ~/Library/Keychains/login.keychain-db ]; then
+            security create-keychain -p "$CERTIFICATE_PASSWORD" ~/Library/Keychains/login.keychain-db
+          fi
+          
+          security default-keychain -s ~/Library/Keychains/login.keychain-db
           security unlock-keychain -p "$CERTIFICATE_PASSWORD" ~/Library/Keychains/login.keychain-db
+
+          echo "$CERTIFICATE" | base64 --decode > certificate.p12
           security import certificate.p12 -P "$CERTIFICATE_PASSWORD" -T /usr/bin/codesign
           security set-key-partition-list -S apple-tool:,apple: -s -k "$CERTIFICATE_PASSWORD" ~/Library/Keychains/login.keychain-db
 
