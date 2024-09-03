@@ -17,3 +17,15 @@ platform :ios do
       )
     end
 end
+
+platform :ios do
+lane :match do
+  match(
+    type: "appstore", # or "development", depending on your needs
+    readonly: false,
+    git_url: "https://github.com/kkaushal92/CICD.git",
+    # other options if needed
+  )
+   end
+end
+
