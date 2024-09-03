@@ -30,7 +30,7 @@ jobs:
         env:
          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
          MATCH_GIT_URL: ${{ secrets.MATCH_GIT_URL }}
-         run: |
+        run: |
           bundle exec fastlane match development --type appstore
 
 
