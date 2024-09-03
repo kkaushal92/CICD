@@ -26,13 +26,13 @@ jobs:
       - name: Install Fastlane
         run: gem install fastlane
 
-      - name: Set up keychain
+      - name: Set up certificates and profiles
         env:
-          CERTIFICATE_PASSWORD: ${{ secrets.CERTIFICATE_PASSWORD }}
-        run: |
-          fastlane run create_keychain \
-            name:"login.keychain-db" \
-            password:"$CERTIFICATE_PASSWORD"
+         MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+         MATCH_GIT_URL: ${{ secrets.MATCH_GIT_URL }}
+         run: |
+          bundle exec fastlane match development --type appstore
+
 
       - name: Unlock keychain
         env:
