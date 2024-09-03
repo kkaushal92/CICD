@@ -40,14 +40,11 @@ jobs:
         run: |
           security unlock-keychain -p "$CERTIFICATE_PASSWORD" ~/Library/Keychains/login.keychain-db
 
-      - name: Decrypt and install certificate
+      - name: Set up certificates and profiles
         env:
-          CERTIFICATE: ${{ secrets.DISTRIBUTION_CERTIFICATE }}
-          CERTIFICATE_PASSWORD: ${{ secrets.CERTIFICATE_PASSWORD }}
+          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
         run: |
-          echo "$CERTIFICATE" | base64 --decode > certificate.p12
-          security import certificate.p12 -P "$CERTIFICATE_PASSWORD" -T /usr/bin/codesign
-          security set-key-partition-list -S apple-tool:,apple: -s -k "$CERTIFICATE_PASSWORD" ~/Library/Keychains/login.keychain-db
+          fastlane match development --type appstore
 
       - uses: ruby/setup-ruby@v1
         with:
