@@ -4,7 +4,7 @@
 # Define constants
 MY_APP_ID = "www.meditation.live"
 MY_PROFILE = "match development www.meditation.live"
-MY_TEAM = "B553YLN78C"
+MY_TEAM = "Meditation.LIVE, Inc"
 
 # Default platform
 default_platform :ios
