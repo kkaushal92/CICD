@@ -33,7 +33,7 @@ lane :match_app do
 desc "Build the app"
   lane :build_app do
     match(type: "development") # Ensure the certificates and profiles are synced
-    gym(scheme: "YourAppScheme") # Build the .ipa file
+    gym(scheme: "CICDDemo") # Build the .ipa file
   end
 
 end
