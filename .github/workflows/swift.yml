@@ -52,6 +52,7 @@ jobs:
       - name: Install certificates and provisioning profiles
         env:
           MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+          FASTLANE_USER: ${{ secrets.FASTLANE_USER }}
           FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }} # Apple Developer account password
         run: bundle exec fastlane match_app
 
