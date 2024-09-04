@@ -1,19 +1,63 @@
+# Disable usage statistics (optional)
+# opt_out_usage
+
+# Define constants
+MY_APP_ID = "www.meditation.live"
+MY_PROFILE = "match development www.meditation.live"
+MY_TEAM = "Meditation.LIVE, Inc"
+
+# Default platform
 default_platform :ios
 
-
+# Project configuration
 xcode_version = ENV['XCODE_VERSION'] || '15.2'
 project = 'CICDDemo.xcodeproj'
 stress_tests_cycles = 50
 derived_data_path = 'derived_data'
 source_packages_path = 'spm_cache'
 
-
+# iOS platform-specific lanes
 platform :ios do
-    desc 'Builds project and executes unit tests'
-    lane :unit_test do |options|
-      scan(
-        clean: options[:clean],
-        skip_package_dependencies_resolution: options[:skip_package_dependencies_resolution]
-      )
-    end
+  desc 'Builds project and executes unit tests'
+  lane :unit_test do |options|
+    scan(
+      clean: options[:clean],
+      skip_package_dependencies_resolution: options[:skip_package_dependencies_resolution]
+    )
+  end
+
+  desc 'Sync certificates and profiles'
+  lane :match_app do
+    match(
+      type: "development", # or "development", depending on your needs
+      app_identifier: MY_APP_ID,
+      readonly: false,
+      git_url: "https://github.com/kkaushal92/CICD.git"
+      # other options if needed
+    )
+  end
+
+  desc "Build the app"
+  lane :build_app do
+    match(type: "development") # Ensure the certificates and profiles are synced
+
+    settings_to_override = {
+      :BUNDLE_IDENTIFIER => MY_APP_ID,
+      :PROVISIONING_PROFILE_SPECIFIER => MY_PROFILE,
+      :DEVELOPMENT_TEAM => MY_TEAM
+    }
+
+    gym(
+      workspace: "CICDDemo.xcworkspace",
+      scheme: "CICDDemo",
+      configuration: "Debug",  # Use "Debug" for development builds
+      xcargs: settings_to_override,
+      export_method: "development",  # Use "development" for the export method
+      export_options: {
+        provisioningProfiles: { 
+          MY_APP_ID => MY_PROFILE
+        }
+      }
+    )
+  end
 end

@@ -1,0 +1,30 @@
+disabled_rules: # rule identifiers to exclude from running
+  - colon
+  - control_statement
+  - line_length
+  - trailing_whitespace
+  - vertical_whitespace
+
+opt_in_rules: # some rules are only opt-in
+  - empty_count
+  - missing_docs
+
+included: # paths to include during linting. `--path` is ignored if present.
+  - Source
+
+excluded: # paths to ignore during linting. Takes precedence over `included`.
+  - Carthage
+  - Pods
+  - Source/ExcludedFolder
+
+custom_rules:
+  no_todo:
+    name: "No TODO"
+    regex: 'TODO|FIXME'
+    message: "TODOs are not allowed"
+    severity: error
+  no_force_unwrap:
+    name: "No Force Unwrap"
+    regex: '!$'
+    message: "Force unwraps are not allowed"
+    severity: warning
