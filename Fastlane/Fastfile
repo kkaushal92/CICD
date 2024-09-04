@@ -22,10 +22,12 @@ platform :ios do
 lane :match_app do
   match(
     type: "development", # or "development", depending on your needs
+    app_identifier: "www.meditation.live", # Add your app identifier here
     readonly: false,
     git_url: "https://github.com/kkaushal92/CICD.git",
     # other options if needed
   )
+
    end
 
 desc "Build the app"
