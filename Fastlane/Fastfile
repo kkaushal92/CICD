@@ -1,5 +1,8 @@
 default_platform :ios
 
+MY_APP_ID = "www.meditation.live""
+MY_PROFILE = "match development www.meditation.live"
+MY_TEAM = "B553YLN78C"
 
 xcode_version = ENV['XCODE_VERSION'] || '15.2'
 project = 'CICDDemo.xcodeproj'
@@ -33,16 +36,22 @@ lane :match_app do
 desc "Build the app"
   lane :build_app do
     match(type: "development") # Ensure the certificates and profiles are synced
+settings_to_override = {
+  :BUNDLE_IDENTIFIER => MY_APP_ID,
+  :PROVISIONING_PROFILE_SPECIFIER => MY_PROFILE,
+  :DEVELOPMENT_TEAM => MY_TEAM
+}
     gym(
   workspace: "CICDDemo.xcworkspace",
   scheme: "CICDDemo",
-  export_xcargs: "-allowProvisioningUpdates",
+  configuration: "Debug",  # Use "Debug" for development builds
+  xcargs: settings_to_override,
+  export_method: "development",  # Use "development" for the export method
   export_options: {
-    signingStyle: "automatic",
-    provisioningProfiles: {
-      "www.meditation.live" => "match Development www.meditation.live"
+        provisioningProfiles: { 
+            MY_APP_ID => MY_PROFILE
+        }
     }
-  }
 )
     end
 end
