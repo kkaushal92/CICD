@@ -34,15 +34,15 @@ desc "Build the app"
   lane :build_app do
     match(type: "development") # Ensure the certificates and profiles are synced
     gym(
-    workspace: "CICDDemo.xcworkspace",
-    scheme: "CICDDemo",
-    export_options: {
+  workspace: "CICDDemo.xcworkspace",
+  scheme: "CICDDemo",
+  export_xcargs: "-allowProvisioningUpdates",
+  export_options: {
     signingStyle: "automatic",
     provisioningProfiles: {
       "www.meditation.live" => "match Development www.meditation.live"
     }
-  },
-  xcargs: "-allowProvisioningUpdates"
+  }
 )
     end
 end
